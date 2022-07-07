@@ -66,10 +66,10 @@ def ais_turn(board):
   
   board[TILES[ai_move]] = "O"
 
-def check_if_win(board, shape):
+def check_if_win(board, mark):
   claimed_tiles = []
   for index, tile in enumerate(board):
-    if tile == shape:
+    if tile == mark:
       claimed_tiles.append(index)
 
   for case in WIN_CASES:
