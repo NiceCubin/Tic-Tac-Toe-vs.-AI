@@ -44,7 +44,7 @@ def display_board(board):
     
     print(board[i], board[i + 1], board[i + 2], sep=" | ")
 
-def players_turn(board):
+def humans_turn(board):
   while True:
     move = input("Pick a tile to claim! (e.g. a3)\n").strip().lower()
 
@@ -60,11 +60,11 @@ def players_turn(board):
     break
 
 def ais_turn(board):
-  ai_move = get_ai_move(board)
+  move = get_ai_move(board)
         
-  print(f"The AI chose {ai_move}!")
+  print(f"The AI chose {move}!")
   
-  board[TILES[ai_move]] = "O"
+  board[TILES[move]] = "O"
 
 def check_if_win(board, mark):
   claimed_tiles = []
@@ -80,13 +80,13 @@ def check_if_win(board, mark):
 
 def get_ai_move(board):
   while True:
-    ai_move = random.choice(list(TILES.keys()))
+    move = random.choice(list(TILES.keys()))
 
-    if board[TILES[ai_move]] == " ":
-      return ai_move
+    if board[TILES[move]] == " ":
+      return move
 
 def main():
-  player_score = 0
+  human_score = 0
   ai_score = 0
   
   print("——————————————————")
@@ -102,7 +102,7 @@ def main():
       turns += 1
       
       if turns % 2 == player_type:
-        players_turn(board)
+        humans_turn(board)
       else:
         ais_turn(board)
 
@@ -110,7 +110,7 @@ def main():
 
       if check_if_win(board, "X"):
         print("You won the match! (impossible)")
-        player_score += 1
+        human_score += 1
         break
         
       if check_if_win(board, "O"):
@@ -120,14 +120,14 @@ def main():
       
       if " " not in board:
         print("It's a tie, nobody wins!")
-        player_score += 0.5
+        human_score += 0.5
         ai_score += 0.5
         break
       
     print("———————")
     print("RESULTS")
     print("———————")
-    print(f"Player: {player_score:g}")
+    print(f"Human: {human_score:g}")
     print(f"AI: {ai_score:g}")
     
     if not ask_for_rematch():
