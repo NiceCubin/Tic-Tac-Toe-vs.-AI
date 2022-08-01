@@ -67,13 +67,13 @@ def ais_turn(board):
   board[TILES[move]] = "O"
 
 def check_if_win(board, mark):
-  claimed_tiles = []
+  players_tiles = []
   for index, tile in enumerate(board):
     if tile == mark:
-      claimed_tiles.append(index)
+      players_tiles.append(index)
 
   for case in WIN_CASES:
-    if not set(case) - set(claimed_tiles):
+    if not set(case) - set(players_tiles):
       return True
 
   return False
